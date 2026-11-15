@@ -391,6 +391,21 @@ const toast=m=>{const t=$("#toast");t.textContent=m;t.classList.add("show");setT
  const sync=()=>{const c=cur();[...dots.children].forEach((d,i)=>d.classList.toggle("on",i===c));prev.disabled=c===0;next.disabled=c===slides.length-1};
  prev.onclick=()=>go(Math.max(0,cur()-1));next.onclick=()=>go(Math.min(slides.length-1,cur()+1));
  t.addEventListener("scroll",()=>requestAnimationFrame(sync),{passive:true});addEventListener("resize",sync);sync();})();
+// smooth wheel scrolling (desktop mouse only)
+(function(){
+ if(matchMedia("(prefers-reduced-motion: reduce)").matches||!matchMedia("(pointer:fine)").matches)return;
+ document.documentElement.style.scrollBehavior="auto";
+ let target=scrollY,cur=scrollY,running=false;
+ const max=()=>document.documentElement.scrollHeight-innerHeight;
+ const busy=()=>!document.getElementById("pm")?.hidden;
+ function tick(){cur+=(target-cur)*0.1;if(Math.abs(target-cur)<0.5){cur=target;running=false}scrollTo(0,cur);if(running)requestAnimationFrame(tick)}
+ function go(y){target=Math.max(0,Math.min(max(),y));if(!running){cur=scrollY;running=true;requestAnimationFrame(tick)}}
+ addEventListener("wheel",e=>{if(e.ctrlKey||busy())return;
+  let el=e.target;while(el&&el!==document.body){const st=getComputedStyle(el);if(/(auto|scroll)/.test(st.overflowY)&&el.scrollHeight>el.clientHeight)return;el=el.parentElement}
+  e.preventDefault();const d=e.deltaMode===1?e.deltaY*32:e.deltaMode===2?e.deltaY*innerHeight:e.deltaY;go((running?target:scrollY)+d)},{passive:false});
+ addEventListener("scroll",()=>{if(!running){target=cur=scrollY}},{passive:true});
+ document.addEventListener("click",e=>{const a=e.target.closest('a[href^="#"]');if(!a)return;const id=a.getAttribute("href").slice(1);const t=id&&document.getElementById(id);if(!t)return;e.preventDefault();go(t.getBoundingClientRect().top+scrollY-24)});
+})();
 // purchase reminder before Stripe
 (function(){const pm=$("#pm"),go=$("#pm-go");
  document.addEventListener("click",e=>{const a=e.target.closest('a[href^="https://buy.stripe.com/"]');if(!a||a.id==="pm-go")return;e.preventDefault();
