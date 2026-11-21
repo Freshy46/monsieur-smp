@@ -63,7 +63,7 @@ footer .wrap{padding-block:24px;max-width:1160px}
 (function(){const c=document.getElementById("snow");if(!c||matchMedia("(prefers-reduced-motion: reduce)").matches)return;
 const x=c.getContext("2d");let w,h,f=[];
 function size(){const d=devicePixelRatio||1;w=innerWidth;h=innerHeight;c.width=w*d;c.height=h*d;x.setTransform(d,0,0,d,0,0);
- f=Array.from({length:Math.min(120,Math.round(w/12))},()=>({x:Math.random()*w,y:Math.random()*h,r:Math.random()*2+1,s:Math.random()*.6+.25,d:Math.random()*6.28,a:Math.random()*.5+.4}))}
+ f=Array.from({length:Math.min(70,Math.round(w/20))},()=>({x:Math.random()*w,y:Math.random()*h,r:Math.random()*2+1,s:Math.random()*.6+.25,d:Math.random()*6.28,a:Math.random()*.5+.4}))}
 function draw(){x.clearRect(0,0,w,h);x.fillStyle="#fff";for(const p of f){x.globalAlpha=p.a;x.beginPath();x.arc(p.x,p.y,p.r,0,6.2832);x.fill();p.y+=p.s;p.d+=.012;p.x+=Math.sin(p.d)*.5;if(p.y>h+4){p.y=-4;p.x=Math.random()*w}}x.globalAlpha=1;requestAnimationFrame(draw)}
 size();draw();addEventListener("resize",size)})();
 </script>
