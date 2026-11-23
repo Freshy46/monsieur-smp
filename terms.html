@@ -65,18 +65,26 @@ footer .wrap{padding-block:24px;max-width:1160px}
  const c=document.getElementById("snow");
  if(!c||matchMedia("(prefers-reduced-motion: reduce)").matches)return;
  const x=c.getContext("2d");const mobile=matchMedia("(max-width:700px)").matches;
- const LAYERS=[
-  {share:.5,r:[.6,1.3],v:[.22,.42],a:[.25,.45]},
-  {share:.35,r:[1.2,2.3],v:[.45,.8],a:[.45,.7]},
-  {share:.15,r:[2.6,4.2],v:[.9,1.4],a:[.7,.9]}];
+ function flake(col,edge){
+  const N=22,s=document.createElement("canvas");s.width=s.height=N*2;
+  const g=s.getContext("2d");g.translate(N,N);g.fillStyle=col;
+  for(let k=0;k<6;k++){g.save();g.rotate(k*Math.PI/3);
+   g.fillRect(-1,-N+5,2,N-5);
+   [[7,5],[11,4],[15,2]].forEach(([d,L])=>{g.fillRect(-L,-d,L*2,2);g.fillRect(-L,-d-2,2,2);g.fillRect(L-2,-d-2,2,2)});
+   g.fillRect(-3,-N+1,6,2);g.fillRect(-2,-N-1,4,2);
+   g.restore();}
+  return s;
+ }
+ const sprites=[flake("#c9d4ea",0),flake("#ffffff",0)];
+ const LAYERS=[{share:.5,size:[6,9],v:[.25,.45],a:[.35,.55],sprite:0},{share:.35,size:[10,14],v:[.45,.75],a:[.55,.75],sprite:1},{share:.15,size:[16,22],v:[.8,1.2],a:[.85,.95],sprite:1}];
  const rnd=(a,b)=>a+Math.random()*(b-a);
  let w=0,h=0,flakes=[],raf=0,last=0,t=0,mx=0,my=0,tx=0,ty=0,rt=0;
  function build(){
   const d=Math.min(devicePixelRatio||1,2);w=innerWidth;h=innerHeight;
   c.width=w*d;c.height=h*d;x.setTransform(d,0,0,d,0,0);
-  const total=Math.round(w*h/(mobile?16000:9000));
+  const total=Math.round(w*h/(mobile?42000:26000));
   flakes=[];
-  LAYERS.forEach((L,li)=>{for(let i=0;i<Math.round(total*L.share);i++)flakes.push({li,x:Math.random()*w,y:Math.random()*h,r:rnd(L.r[0],L.r[1]),v:rnd(L.v[0],L.v[1]),a:rnd(L.a[0],L.a[1]),ph:Math.random()*6.283,sw:rnd(.2,.7),fr:rnd(.4,1.1)})});
+  LAYERS.forEach((L,li)=>{for(let i=0;i<Math.round(total*L.share);i++)flakes.push({li,x:Math.random()*w,y:Math.random()*h,s:rnd(L.size[0],L.size[1]),v:rnd(L.v[0],L.v[1]),a:rnd(L.a[0],L.a[1]),ph:Math.random()*6.283,sw:rnd(.2,.6),rot:Math.random()*6.283,vr:rnd(-.01,.01),fr:rnd(.4,1.0)})});
  }
  function frame(now){
   const dt=Math.min(2,(now-(last||now))/16.67);last=now;t+=dt;
@@ -84,13 +92,15 @@ footer .wrap{padding-block:24px;max-width:1160px}
   const wind=Math.sin(t*.004)*.5+Math.sin(t*.0113)*.25+tx*.6;
   x.clearRect(0,0,w,h);
   for(const f of flakes){
-   f.ph+=.012*f.fr*dt;
+   f.ph+=.012*f.fr*dt;f.rot+=f.vr*dt;
    f.x+=(Math.sin(f.ph)*f.sw*.7+wind*(.4+f.v))*dt;
    f.y+=f.v*dt*(1+ty*.3);
-   if(f.y>h+8){f.y=-8;f.x=Math.random()*w}
-   if(f.x<-8)f.x=w+8;if(f.x>w+8)f.x=-8;
-   if(f.li===2){x.globalAlpha=f.a*.18;x.beginPath();x.arc(f.x,f.y,f.r*2.6,0,6.2832);x.fillStyle="#ffffff";x.fill()}
-   x.globalAlpha=f.a;x.beginPath();x.arc(f.x,f.y,f.r,0,6.2832);x.fillStyle="#ffffff";x.fill();
+   if(f.y>h+30){f.y=-30;f.x=Math.random()*w}
+   if(f.x<-30)f.x=w+30;if(f.x>w+30)f.x=-30;
+   x.save();x.globalAlpha=f.a;x.translate(f.x,f.y);x.rotate(f.rot);
+   const sp=sprites[LAYERS[f.li].sprite];
+   x.drawImage(sp,-f.s,-f.s,f.s*2,f.s*2);
+   x.restore();
   }
   x.globalAlpha=1;
   raf=requestAnimationFrame(frame);
