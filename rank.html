@@ -385,6 +385,19 @@ h1,h2,h3{font-weight:600!important;text-transform:none!important;letter-spacing:
 
 .btn,.tabs a,.pill,.cartbtn{font-family:var(--body)!important}
 
+.strip-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid var(--line);border-radius:18px;overflow:hidden;background:var(--panel)}
+.sc{display:grid;gap:8px;padding:26px 24px;border-right:1px solid var(--line);align-content:start}
+.sc:last-child{border-right:0}
+.sc-ic{width:34px;height:34px;display:grid;place-items:center;border-radius:10px;color:#8fb8ff;background:rgba(70,140,255,.12);font-size:1.1rem}
+.sc-k{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#8fb8ff;font-weight:700}
+.sc b{font-size:1.15rem;font-weight:700}
+.sc-s{color:var(--muted);font-size:.9rem;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.sc-s a{color:#8fb8ff;text-decoration:none}
+.sc-s a:hover{text-decoration:underline}
+.copy{background:none;border:1px solid var(--line);color:var(--fg);border-radius:999px;padding:3px 10px;font:inherit;font-size:.75rem;cursor:pointer}
+.copy:hover{border-color:var(--gold)}
+@media (max-width:820px){.strip-grid{grid-template-columns:1fr}.sc{border-right:0;border-bottom:1px solid var(--line)}.sc:last-child{border-bottom:0}}
+
 </style>
 </head>
 <body>
@@ -487,20 +500,21 @@ h1,h2,h3{font-weight:600!important;text-transform:none!important;letter-spacing:
  const key=new THREE.DirectionalLight(0xf2f6ff,1.6);key.position.set(4,6,7);scene.add(key);
  const rim=new THREE.PointLight(0xb46cff,3,22);rim.position.set(-5,-2,4);scene.add(rim);
  const warm=new THREE.PointLight(0xffb36b,1.2,18);warm.position.set(5,-3,3);scene.add(warm);
- const geo=new THREE.OctahedronGeometry(1,0);
+ const tex=new THREE.TextureLoader().load("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALkAAADICAYAAAC000A4AAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAAGYktHRAD/AP8A/6C9p5MAAAAHdElNRQfqCxcRHjewDZ/kAAADqElEQVR42u3cMatXdRzH8ePlri4NDdcQgqi5wUEahHAIIiSo5noCCQ5OPgKHpKmxBLfrIiE0hBAOgouzEgSBi+t9APYczpf88X/f12s//M+5vPlNn/u7sHFQbt44fbv6HQ7N0eoXgP+byMkTOXkiJ0/k5ImcPJGTJ3LyRE6eyMkTOXkiJ0/k5ImcvAurX+C8mU5l7935bPUnLPHdjw92P+skJ0/k5ImcPJGTJ3LyRE6eyMkTOXkiJ0/k5ImcPJGTJ3LyRE6eyMk7Xv0Ch2iyCb9+7Yvhr58t++6jKye7///gxW9ny66cdpKTJ3LyRE6eyMkTOXkiJ0/k5ImcPJGTJ3LyRE6eyMkTOXkiJ+/cTm0nc9nJ9cmPn87e+/HTi7uf/erWxdFV3ZO57JPnL2cfPuAkJ0/k5ImcPJGTJ3LyRE6eyMkTOXkiJ0/k5ImcPJGTJ3LyRE6eyMk72D35ZA++bdv2/deTK5TXXZ/8wXv7n53+zVZuwiec5OSJnDyRkydy8kROnsjJEzl5IidP5OSJnDyRkydy8kROnsjJWzq1nUw/r1+bTGXXmUxlt+1w567PXjwZPf/w2e3d1047yckTOXkiJ0/k5ImcPJGTJ3LyRE6eyMkTOXkiJ0/k5ImcPJGTN5raTm9JPdS57NGVk92zz+nf7PKlD5d992QuO5nKTjnJyRM5eSInT+TkiZw8kZMncvJETp7IyRM5eSInT+TkiZw8kZMncvKOJ/vm6bb51d/rriH+8oeT3c/+/tPZ7r/Zn3/9seybX7/5Z/T8yk34hJOcPJGTJ3LyRE6eyMkTOXkiJ0/k5ImcPJGTJ3LyRE6eyMkTOXnH0/nlxGSq+/FHn4x++96v+2e+09+eONTrk1dykpMncvJETp7IyRM5eSInT+TkiZw8kZMncvJETp7IyRM5eSIn73jy8HSmO3n+39ez357eyLvim7ft/M5lJ5zk5ImcPJGTJ3LyRE6eyMkTOXkiJ0/k5ImcPJGTJ3LyRE6eyMkTOXmjPfnUpff3b7qnu+zJnvz+6S+7n7UHf/ec5OSJnDyRkydy8kROnsjJEzl5IidP5OSJnDyRkydy8kROnsjJG80+v7l69+2qF7/66eej5ydXP//86Ftz2QPiJCdP5OSJnDyRkydy8kROnsjJEzl5IidP5OSJnDyRkydy8kROnsjJW7qLvnnjdNke3Sb8/HCSkydy8kROnsjJEzl5IidP5OSJnDyRkydy8kROnsjJEzl5IifvP3S5dWEZdPWfAAAAAElFTkSuQmCC");
+ if(THREE.sRGBEncoding)tex.encoding=THREE.sRGBEncoding;
  const group=new THREE.Group();scene.add(group);
- const items=[];const N=small?5:9;
+ const items=[];const N=small?3:4;
  for(let i=0;i<N;i++){
-  const mat=new THREE.MeshPhysicalMaterial({color:new THREE.Color().setHSL(.76+Math.random()*.06,.7,.58),roughness:.12,metalness:.15,clearcoat:1,clearcoatRoughness:.08,emissive:0x3a0f5c,emissiveIntensity:.45,transparent:true,opacity:.78});
-  const m=new THREE.Mesh(geo,mat);
-  const s=.32+Math.random()*.5;m.scale.set(s*.62,s*1.7,s*.62);
-  const depth=Math.random();
-  const edge=Math.random()<.5?-1:1;
-  m.position.set(3.4+Math.random()*2.2,edge*(1.9+Math.random()*1.1),-depth*3);
-  m.userData={rx:.2+Math.random()*.5,ry:.2+Math.random()*.5,bob:Math.random()*6.28,sp:.18+Math.random()*.22,base:m.position.y,depth};
+  tex.magFilter=THREE.NearestFilter;tex.minFilter=THREE.NearestFilter;
+  const mat=new THREE.MeshBasicMaterial({map:tex,transparent:false,alphaTest:.5,side:THREE.DoubleSide});
+  const size=(.9+Math.random()*.9)*(small?.7:1);
+  const m=new THREE.Mesh(new THREE.PlaneGeometry(size*1.6,size),mat);
+  const edge=1;
+  m.position.set(i%2?(2.4+Math.random()*2.2):-(3.2+Math.random()*1.2),i%2?(2.1+Math.random()*.5):-(2.9+Math.random()*.25),-Math.random()*2.5+.5);
+  m.userData={rx:.12+Math.random()*.2,ry:.25+Math.random()*.3,rz:(Math.random()-.5)*.25,bob:Math.random()*6.28,sp:.2+Math.random()*.25,base:m.position.y};
   group.add(m);items.push(m);
  }
- let raf=0,visible=true,mx=0,my=0,tx=0,ty=0;
+let raf=0,visible=true,mx=0,my=0,tx=0,ty=0;
  const t0=performance.now();
  function size(){const w=c.clientWidth,h=c.clientHeight;if(!w||!h)return;renderer.setSize(w,h,false);cam.aspect=w/h;cam.updateProjectionMatrix();}
  function frame(now){
@@ -508,7 +522,7 @@ h1,h2,h3{font-weight:600!important;text-transform:none!important;letter-spacing:
   tx+=(mx-tx)*.035;ty+=(my-ty)*.035;
   cam.position.x=tx*.7;cam.position.y=-ty*.45;cam.lookAt(0,0,0);
   for(const m of items){
-   m.rotation.x+=m.userData.rx*.0035;m.rotation.y+=m.userData.ry*.0045;
+   m.rotation.y=Math.sin(t*m.userData.ry)*.55;m.rotation.z=m.userData.rz+Math.sin(t*m.userData.sp)*.08;
    m.position.y=m.userData.base+Math.sin(t*m.userData.sp+m.userData.bob)*.3;
   }
   group.rotation.y=Math.sin(t*.1)*.12+tx*.08;
@@ -592,6 +606,20 @@ h1,h2,h3{font-weight:600!important;text-transform:none!important;letter-spacing:
 </script>
 <script>
 const $=s=>document.querySelector(s);
+(function(){
+ const pc=document.getElementById("pcount");
+ if(pc){fetch("https://api.mcsrvstat.us/3/monsieur.smp.quest").then(r=>r.json()).then(d=>{
+   if(d&&d.online&&d.players){pc.textContent=d.players.online+" players online"}
+   else{pc.textContent="Server offline"}
+ }).catch(()=>{pc.textContent="Player count unavailable"})}
+ const cb=document.getElementById("copyip");
+ if(cb){cb.addEventListener("click",()=>{const t="monsieur.smp.quest";
+   (navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(()=>{cb.textContent="Copied"},()=>{cb.textContent="Copy failed"});
+   setTimeout(()=>{cb.textContent="Copy IP"},1500)})}
+})();
+
+(function(){const g=document.querySelector("#keys .keys");if(!g)return;const pr=c=>parseFloat(c.querySelector(".cprice").textContent.replace("£",""));
+ [...g.children].sort((a,b)=>pr(a)-pr(b)).forEach(c=>g.appendChild(c));})();
 (function(){const pm=$("#pm");if(!pm)return;const go=$("#pm-go");
  document.addEventListener("click",e=>{const a=e.target.closest('a[href^="https://buy.stripe.com/"]');if(!a||a.id==="pm-go")return;e.preventDefault();
   const card=a.closest(".key,.rk,.don");const name=card?(card.dataset.name||((card.querySelector("h3")||{}).textContent||"")):"";
