@@ -455,9 +455,20 @@ h1,h2,h3{font-weight:600!important;text-transform:none!important;letter-spacing:
 .people{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px;margin-top:28px;padding-bottom:40px}
 .person{display:grid;justify-items:center;gap:6px;text-align:center;text-decoration:none;background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:26px 18px;transition:translate .4s cubic-bezier(.2,.8,.2,1),border-color .4s,box-shadow .4s}
 .person:hover{translate:0 -4px;border-color:rgba(70,140,255,.7);box-shadow:0 20px 40px -18px rgba(0,0,0,.6),0 0 26px -6px rgba(47,123,255,.35)}
-.person img{image-rendering:pixelated;border-radius:12px;margin-bottom:8px}
+.person img{image-rendering:pixelated;margin-bottom:6px;height:200px;width:auto;max-width:100%;object-fit:contain}
 .person .pr{font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);font-weight:700}
 .person b{font-family:var(--body);font-size:1.05rem;font-weight:700}
+
+header .wrap{position:relative;flex-wrap:nowrap}
+header .tabs:not(.pinned){position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);margin:0}
+header .tabs.pinned{flex:1;max-width:none;width:100%;justify-content:space-between;overflow:visible;margin-left:48px;padding:6px 10px}
+header .tabs.pinned a{opacity:1;translate:0 0;max-width:none;padding-left:14px;padding-right:14px}
+
+header .brand{white-space:nowrap;flex:none}
+
+.pwrap{display:grid;gap:10px;align-content:start}
+.site-pill{justify-self:center;font-size:.85rem;font-weight:700;color:#8fb8ff;text-decoration:none;border:1px solid rgba(70,140,255,.45);border-radius:999px;padding:7px 14px}
+.site-pill:hover{border-color:var(--gold);color:var(--gold)}
 
 </style>
 </head>
@@ -600,7 +611,7 @@ h1,h2,h3{font-weight:600!important;text-transform:none!important;letter-spacing:
 </script>
 <script>
 const $=s=>document.querySelector(s);
-(function(){const n=document.querySelector("header .tabs");if(!n)return;
+(function(){const n=document.querySelector("header .tabs");if(!n||n.classList.contains("pinned"))return;
  const near=(x,y)=>{const r=n.getBoundingClientRect();const dx=Math.max(r.left-x,0,x-r.right),dy=Math.max(r.top-y,0,y-r.bottom);return Math.hypot(dx,dy)<110};
  let open=false;const set=v=>{if(v!==open){open=v;n.classList.toggle("open",v)}};
  addEventListener("pointermove",e=>{if(e.pointerType==="mouse")set(near(e.clientX,e.clientY))},{passive:true});
