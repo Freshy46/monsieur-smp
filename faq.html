@@ -400,11 +400,20 @@ h1,h2,h3{font-weight:600!important;text-transform:none!important;letter-spacing:
 
 .rel{font-family:var(--body);font-size:.8rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);border:1px solid rgba(232,194,122,.45);border-radius:999px;padding:6px 12px}
 
+.bundle-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;padding-bottom:40px}
+.bcard{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:30px;display:grid;gap:12px;align-content:start;justify-items:start}
+.bcard h2{font-size:1.7rem}
+.bcard p{margin:0}
+.bprice{font-family:var(--display);font-size:2.6rem;font-weight:700;color:var(--gold)}
+.bnote{font-size:.85rem;color:var(--muted)}
+#rank2{padding-bottom:40px}
+@media (max-width:820px){.bundle-grid{grid-template-columns:1fr}}
+
 </style>
 </head>
 <body>
 <canvas id="snow" aria-hidden="true"></canvas>
-<header><div class="wrap"><a class="brand" href="index.html"><span><b>MONSIEUR SMP</b><small>Official store</small></span></a><nav class="tabs" aria-label="Store sections"><a href="rank.html">Rank</a><a href="shards.html">Shards</a><a href="keys.html">Crate keys</a><a href="https://discord.gg/PhENVjPVd7">Discord</a></nav></div></header>
+<header><div class="wrap"><a class="brand" href="index.html"><span><b>MONSIEUR SMP</b><small>Official store</small></span></a><nav class="tabs" aria-label="Store sections"><a href="rank.html">Rank</a><a href="shards.html">Shards</a><a href="bundles.html">Bundles</a><a href="keys.html">Crate keys</a><a href="https://discord.gg/PhENVjPVd7">Discord</a></nav></div></header>
 <div class="lights" aria-hidden="true"></div>
 <main><div class="wrap page-hd"><span class="eyebrow">Monsieur SMP</span><h1>FAQ</h1><p>Answers to the questions we get most.</p></div><div class="wrap faq"><h2 style="margin-top:0">Frequently asked questions</h2><p>Can't find your answer? Open a ticket in our Discord.</p><details><summary>What is Monsieur SMP?</summary><p>A Minecraft survival server. Everything in the store is cosmetic or a convenience. Nothing we sell gives a fighting advantage or ownership of anything on the server.</p></details><details><summary>How do I get my items?</summary><p>Pay on the store page, then take a screenshot or photo of your payment. Open a ticket in our Discord and send it with your Minecraft username. Staff deliver your items by hand.</p></details><details><summary>What payments do you accept?</summary><p>Card payments through Stripe. We never see or store your card details.</p></details><details><summary>Can I get a refund?</summary><p>No. Store items are digital and non-refundable once they&#x27;ve been delivered. We&#x27;ll look at a few specific cases, which are listed on the Refund Policy page.</p></details><details><summary>How does Monsieur+ work?</summary><p>Monsieur+ is £4 a month. It gives you extra auction, home and order slots, and 1,000 shards every month while the rank is active. It renews until you cancel.</p></details><details><summary>How do I cancel Monsieur+?</summary><p>Open a Discord ticket and ask to cancel. You keep the rank until the end of the month you&#x27;ve already paid for.</p></details><details><summary>What are shards?</summary><p>Shards are an in-game currency. Shard packs are delivered to your account in-game after payment.</p></details><details><summary>What is the server IP?</summary><p>monsieur.smp.quest. Java Edition. Join the Discord for news and updates.</p></details><details><summary>Are mods allowed?</summary><p>No. Hacked clients and cheat mods are banned, including movement, inventory, radar, freecam and ESP mods. See the Rules page for the full list.</p></details><details><summary>My payment went through but I got nothing. What now?</summary><p>Open a Discord ticket with your Stripe receipt, your Minecraft username and what you expected to receive.</p></details></div></main>
 <div class="pm" id="pm" hidden><div class="pm-box" role="dialog" aria-modal="true" aria-labelledby="pm-t">

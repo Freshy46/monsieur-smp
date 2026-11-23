@@ -400,11 +400,20 @@ h1,h2,h3{font-weight:600!important;text-transform:none!important;letter-spacing:
 
 .rel{font-family:var(--body);font-size:.8rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);border:1px solid rgba(232,194,122,.45);border-radius:999px;padding:6px 12px}
 
+.bundle-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;padding-bottom:40px}
+.bcard{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:30px;display:grid;gap:12px;align-content:start;justify-items:start}
+.bcard h2{font-size:1.7rem}
+.bcard p{margin:0}
+.bprice{font-family:var(--display);font-size:2.6rem;font-weight:700;color:var(--gold)}
+.bnote{font-size:.85rem;color:var(--muted)}
+#rank2{padding-bottom:40px}
+@media (max-width:820px){.bundle-grid{grid-template-columns:1fr}}
+
 </style>
 </head>
 <body>
 <canvas id="snow" aria-hidden="true"></canvas>
-<header><div class="wrap"><a class="brand" href="index.html"><span><b>MONSIEUR SMP</b><small>Official store</small></span></a><nav class="tabs" aria-label="Store sections"><a href="rank.html">Rank</a><a href="shards.html">Shards</a><a href="keys.html" class="on">Crate keys</a><a href="https://discord.gg/PhENVjPVd7">Discord</a></nav></div></header>
+<header><div class="wrap"><a class="brand" href="index.html"><span><b>MONSIEUR SMP</b><small>Official store</small></span></a><nav class="tabs" aria-label="Store sections"><a href="rank.html">Rank</a><a href="shards.html">Shards</a><a href="bundles.html">Bundles</a><a href="keys.html" class="on">Crate keys</a><a href="https://discord.gg/PhENVjPVd7">Discord</a></nav></div></header>
 <div class="lights" aria-hidden="true"></div>
 <main><div class="wrap page-hd"><span class="eyebrow">Monsieur SMP</span><h1>Crate keys</h1><p>Five keys, each opening its own crate.</p></div><section id="keys"><div class="wrap">
   <div class="sechead reveal"><div><span class="eyebrow">Crate keys</span><h2>Light a candle. Open a crate.</h2></div><p class="muted">Five crates, each with its own loot.</p></div>

@@ -400,11 +400,20 @@ h1,h2,h3{font-weight:600!important;text-transform:none!important;letter-spacing:
 
 .rel{font-family:var(--body);font-size:.8rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);border:1px solid rgba(232,194,122,.45);border-radius:999px;padding:6px 12px}
 
+.bundle-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;padding-bottom:40px}
+.bcard{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:30px;display:grid;gap:12px;align-content:start;justify-items:start}
+.bcard h2{font-size:1.7rem}
+.bcard p{margin:0}
+.bprice{font-family:var(--display);font-size:2.6rem;font-weight:700;color:var(--gold)}
+.bnote{font-size:.85rem;color:var(--muted)}
+#rank2{padding-bottom:40px}
+@media (max-width:820px){.bundle-grid{grid-template-columns:1fr}}
+
 </style>
 </head>
 <body>
 <canvas id="snow" aria-hidden="true"></canvas>
-<header><div class="wrap"><a class="brand" href="index.html"><span><b>MONSIEUR SMP</b><small>Official store</small></span></a><nav class="tabs" aria-label="Store sections"><a href="rank.html" class="on">Rank</a><a href="shards.html">Shards</a><a href="keys.html">Crate keys</a><a href="https://discord.gg/PhENVjPVd7">Discord</a></nav></div></header>
+<header><div class="wrap"><a class="brand" href="index.html"><span><b>MONSIEUR SMP</b><small>Official store</small></span></a><nav class="tabs" aria-label="Store sections"><a href="rank.html" class="on">Rank</a><a href="shards.html">Shards</a><a href="bundles.html">Bundles</a><a href="keys.html">Crate keys</a><a href="https://discord.gg/PhENVjPVd7">Discord</a></nav></div></header>
 <div class="lights" aria-hidden="true"></div>
 <main><div class="wrap page-hd"><span class="eyebrow">Monsieur SMP</span><h1>Monsieur+</h1><p>Extra room to trade, build and sell, plus a shard drop every month.</p></div><section id="rank"><div class="wrap">
   <div class="car reveal"><div class="car-track" id="carTrack">
@@ -432,7 +441,7 @@ h1,h2,h3{font-weight:600!important;text-transform:none!important;letter-spacing:
 </div>
 <div class="car-ctl"><button class="car-btn" type="button" id="carPrev" aria-label="Previous rank"><i class="arr l"></i></button><div class="car-dots" id="carDots"></div><button class="car-btn" type="button" id="carNext" aria-label="Next rank"><i class="arr"></i></button></div>
 </div>
-</div></section></main>
+</div></section><section id="rank2"><div class="wrap"><div class="rk" data-name="Monsieur++ rank"><div class="rk-top"><div><span class="rk-chip">Rank</span><h2 class="rk-name">Monsieur<span>++</span></h2><p class="rk-sub">Monthly subscription, billed through Stripe. Cancel any time.</p></div><div class="rk-buy"><a class="btn gold-b rk-btn" href="https://buy.stripe.com/8x26oGfxQfJs3lycX8dZ613">Subscribe<i class="arr"></i></a><span class="rk-note">Billed monthly through Stripe.</span></div></div></div></div></section></main>
 <div class="pm" id="pm" hidden><div class="pm-box" role="dialog" aria-modal="true" aria-labelledby="pm-t">
   <span class="eyebrow">Before you pay</span>
   <h3 id="pm-t">Keep proof of your purchase</h3>

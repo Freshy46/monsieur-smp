@@ -400,11 +400,20 @@ h1,h2,h3{font-weight:600!important;text-transform:none!important;letter-spacing:
 
 .rel{font-family:var(--body);font-size:.8rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);border:1px solid rgba(232,194,122,.45);border-radius:999px;padding:6px 12px}
 
+.bundle-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;padding-bottom:40px}
+.bcard{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:30px;display:grid;gap:12px;align-content:start;justify-items:start}
+.bcard h2{font-size:1.7rem}
+.bcard p{margin:0}
+.bprice{font-family:var(--display);font-size:2.6rem;font-weight:700;color:var(--gold)}
+.bnote{font-size:.85rem;color:var(--muted)}
+#rank2{padding-bottom:40px}
+@media (max-width:820px){.bundle-grid{grid-template-columns:1fr}}
+
 </style>
 </head>
 <body>
 <canvas id="snow" aria-hidden="true"></canvas>
-<header><div class="wrap"><a class="brand" href="index.html"><span><b>MONSIEUR SMP</b><small>Official store</small></span></a><nav class="tabs" aria-label="Store sections"><a href="rank.html">Rank</a><a href="shards.html">Shards</a><a href="keys.html">Crate keys</a><a href="https://discord.gg/PhENVjPVd7">Discord</a></nav></div></header>
+<header><div class="wrap"><a class="brand" href="index.html"><span><b>MONSIEUR SMP</b><small>Official store</small></span></a><nav class="tabs" aria-label="Store sections"><a href="rank.html">Rank</a><a href="shards.html">Shards</a><a href="bundles.html">Bundles</a><a href="keys.html">Crate keys</a><a href="https://discord.gg/PhENVjPVd7">Discord</a></nav></div></header>
 <div class="lights" aria-hidden="true"></div>
 <main><div class="wrap page-hd"><span class="eyebrow">Monsieur SMP</span><h1>Support</h1><p>Purchases, bans and appeals are handled through a Discord ticket.</p></div><div class="wrap faq"><h2 style="margin-top:0">Get help</h2><p>Open a ticket in our Discord for anything about purchases, bans or appeals.</p><p style="margin-top:20px"><a class="btn gold-b" href="https://discord.gg/PhENVjPVd7">Open a ticket on Discord<i class="arr"></i></a></p><h2>What to include</h2><ol class="steps-list"><li>Your Minecraft username</li><li>Your Stripe receipt, or the screenshot you took when you paid</li><li>What you bought and what you expected to get</li><li>For a ban appeal: when you were punished and why</li></ol><h2>Read first</h2><p>Check the <a href="faq.html">FAQ</a>, the <a href="rules.html">Rules</a> and our <a href="refunds.html">Refund Policy</a> before you open a ticket.</p></div></main>
 <div class="pm" id="pm" hidden><div class="pm-box" role="dialog" aria-modal="true" aria-labelledby="pm-t">
